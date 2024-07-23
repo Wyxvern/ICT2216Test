@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  flask-app:
+    build:
+      context: ./flask-app
+    volumes:
+      - ./flask-app:/app
+    ports:
+      - "5000:5000"
+
+  caddy:
+    build:
+      context: ./flask-app/caddy
+    ports:
+      - "80:80"
+    depends_on:
+      - flask-app
